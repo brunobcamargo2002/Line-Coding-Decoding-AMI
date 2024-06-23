@@ -1,5 +1,35 @@
+from matplotlib import pyplot as plt
+import numpy as np
+
 from itertools import product
 from itertools import product
+
+#Plot do Gráfico
+def plot_signal(signal):
+
+    pontos_por_signal=100
+    time_step=0.01
+
+    signal_value = []
+    for s in signal:
+        if(s=='+'):
+            signal_value.append(1)
+        elif(s=='0'):
+            signal_value.append(0)
+        else:
+            signal_value.append(-1)
+    
+    axisX = np.arange(0, (pontos_por_signal*time_step*len(signal_value)), time_step)
+    axisY = np.zeros(axisX.size)
+
+    count = 0
+    for i in range(axisX.size):
+        axisY[i]=signal_value[count]
+        if((i+1)%pontos_por_signal==0):
+            count+=1
+
+    plt.plot(axisX, axisY)
+    plt.show()
 
 def generate_6t8b_table():
     # Gerar todas as combinações de 8 bits
