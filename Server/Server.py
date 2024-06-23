@@ -41,7 +41,9 @@ def start_server(ip, port):
 
         while True:
             # Recebe mensagem do cliente
+            print("teste")
             encrypeted_message = client_socket.recv(1024).decode('utf-8')
+            print("teste")
             decrypt_message = fernet.decrypt(encrypeted_message).decode('utf-8')
             message = binary_to_string(decrypt_message)
             
