@@ -17,8 +17,10 @@ class Connection():
         try:
             self.client_socket.connect((ip, port))
             return True
-        except socket.error:
+        except socket.error as e:
+            print(f"Erro de conexão: {e}")
             return False
+
     def end_connection(self):
         self.client_socket.close()
     def send_message(self, message):
