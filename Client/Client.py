@@ -1,7 +1,7 @@
 import socket
 from cryptography.fernet import Fernet
 from itertools import product
-from itertools import product
+
 
 def generate_8b6t_table():
     # Gerar todas as combinações de 8 bits
@@ -39,10 +39,14 @@ def string_to_binary(message):
 
 def start_client(ip, port):
 
+    #usa a chave criptografica
     with open('chave.key', 'rb') as filekey:
         chave = filekey.read()
     fernet = Fernet(chave)
-    
+
+    #cria a tabela de conversão
+    table = generate_8b6t_table()
+
     # Cria um socket
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -52,21 +56,21 @@ def start_client(ip, port):
 
     try:
         while True:
-            # Recebe entrada do usuário
             
-            message = input(f"Digite a mensagem para enviar ao servidor (ou 'exit' para sair):\n ")
-
-            binary_message = string_to_binary(message)
-
-            crypto_message = fernet.encrypt(binary_message.encode('utf-8'))
+            message = input(f"Digite a mensagem para enviar ao servidor (ou 'exit' para sair): ")
+            crypto_message = fernet.encrypt(message.encode())
+            binary_message = string_to_binary(crypto_message.decode())
+            ternary_message = binary_to_ternary(binary_message, table)
 
             print(f"Mensagem enviada: {message}\n")
-            print(f"Mensagem enviada em binário: {binary_message}\n")
             print(f"Mensagem enviada criptografada: {crypto_message}\n")
+            print(f"Mensagem enviada em binário: {binary_message}\n")
+            print(f"Mensagem enviada em ternário: {ternary_message}\n")
+
 
 
             # Envia a mensagem ao servidor
-            client_socket.sendall(crypto_message)
+            client_socket.sendall(ternary_message.encode('utf-8'))
 
 
     except KeyboardInterrupt:
