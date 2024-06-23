@@ -1,5 +1,4 @@
 from matplotlib import pyplot as plt
-from scipy import signal
 import numpy as np
 
 from itertools import product

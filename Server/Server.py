@@ -41,10 +41,11 @@ def start_server(ip, port):
             decrypt_message = fernet.decrypt(encrypted_message.encode('UTF-8')).decode('utf-8')
 
             #Saída dos processamentos
+            print(f"Mensagem recebida em ternário: {message_6t}\n")
+            print(f"Mensagem recebida em binário: {message_8b}\n")
+            print(f"Mensagem recebida criptografada: {encrypted_message}\n")
+            print(f"Mensagem recebida: {decrypt_message}\n")
             Alg.plot_signal(message_6t)
-            print(f"Mensagem enviada em binário: {final_bytes}\n")
-            print(f"Mensagem enviada criptografada: {encrypted_message}\n")
-            print(f"Mensagem enviada: {decrypt_message}\n")
 
             #print(f"Mensagem recebida: {message}\n")
             if(decrypt_message=="exit"):
@@ -55,6 +56,6 @@ def start_server(ip, port):
 if __name__ == "__main__":
 
     IP = "127.0.0.1"
-    PORT = 8080
+    PORT = 8081
 
     start_server(IP, PORT)
