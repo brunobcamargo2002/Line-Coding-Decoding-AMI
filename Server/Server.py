@@ -26,23 +26,16 @@ def start_server(ip, port):
 
         while True:
             message_6t= client_socket.recv(1024).decode()
-            message_8b = []
-            #Converte o sinal 6t recebido para 8b
-            for i in range(len(message_6t)//6):
-                value=map6t8b[message_6t[6*i:6*i+6]]
-                decimal_value= int(value, 2)
-                byte_value = decimal_value.to_bytes(1, byteorder='big')
-                message_8b.append(byte_value)
-            final_bytes = b''.join(message_8b)
+            final_bytes = Alg.ternary_to_binary(message_6t, map6t8b)
 
             # Mensagem Criptografada
-            encrypted_message = final_bytes.decode('UTF-8')
+            encrypted_message = Alg.binary_to_string(final_bytes)
             # Mensagem Decriptografada
             decrypt_message = fernet.decrypt(encrypted_message.encode('UTF-8')).decode('utf-8')
 
             #Saída dos processamentos
             print(f"Mensagem recebida em ternário: {message_6t}\n")
-            print(f"Mensagem recebida em binário: {message_8b}\n")
+            print(f"Mensagem recebida em binário: {final_bytes}\n")
             print(f"Mensagem recebida criptografada: {encrypted_message}\n")
             print(f"Mensagem recebida: {decrypt_message}\n")
             Alg.plot_signal(message_6t)
@@ -56,6 +49,6 @@ def start_server(ip, port):
 if __name__ == "__main__":
 
     IP = "127.0.0.1"
-    PORT = 8081
+    PORT = 8080
 
     start_server(IP, PORT)

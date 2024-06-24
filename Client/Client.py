@@ -52,6 +52,6 @@ def start_client(ip, port):
 if __name__ == "__main__":
     # Especifica o endereço IP e a porta do servidor
     IP = "127.0.0.1"
-    PORT = 8081
+    PORT = 8080
 
     start_client(IP, PORT)
