@@ -40,6 +40,10 @@ def generate_8b6t_table():
     
     # Mapear as 256 primeiras combinações de 6 trits às combinações de 8 bits
     mapping_table = {eight_bit_combinations[i]: six_trit_combinations[i] for i in range(256)}
+    mapping_table ['00010001']='-0-0++'
+    mapping_table ['01010011']='-+-++0'
+    mapping_table ['01010000']='+--+0+'
+
     
     return mapping_table
 

@@ -1,5 +1,6 @@
 import socket
 import Algorithms as Alg
+import teste4 as algoritmo
 from cryptography.fernet import Fernet
 
 
@@ -17,7 +18,7 @@ def start_server(ip, port):
     fernet = Fernet(chave)
 
     #Gera Map 8b6t
-    map6t8b = Alg.generate_6t8b_table()
+    pattern_to_pattern, pattern_to_binary = algoritmo.generate_pattern_functions()
 
     while True:
         # Aceita uma conexão de um cliente
@@ -25,30 +26,51 @@ def start_server(ip, port):
         print(f"Conexão aceita de {client_address}\n")
 
         while True:
+            # message_6t= client_socket.recv(1024).decode()
+            # final_bytes = pattern_to_binary(message_6t)
+
+            # # Mensagem Criptografada
+            # encrypted_message = Alg.binary_to_string(final_bytes)
+            # # Mensagem Decriptografada
+            # decrypt_message = fernet.decrypt(encrypted_message.encode('UTF-8')).decode('utf-8')
+
+            # #Saída dos processamentos
+            # print(f"Mensagem recebida em ternário: {message_6t}\n")
+            # print(f"Mensagem recebida em binário: {final_bytes}\n")
+            # print(f"Mensagem recebida criptografada: {encrypted_message}\n")
+            # print(f"Mensagem recebida: {decrypt_message}\n")
+            # Alg.plot_signal(message_6t)
+
+            # print(f"Mensagem recebida: {message}\n")
+            # if(decrypt_message=="exit"):
+            #     break
+
+            #-----------------------------------------SEM CRIPTOGRAFIA------------------------------------------------
+
             message_6t= client_socket.recv(1024).decode()
-            final_bytes = Alg.ternary_to_binary(message_6t, map6t8b)
+            final_bytes = pattern_to_binary(message_6t)
 
             # Mensagem Criptografada
-            encrypted_message = Alg.binary_to_string(final_bytes)
+            # encrypted_message = Alg.binary_to_string(final_bytes)
             # Mensagem Decriptografada
-            decrypt_message = fernet.decrypt(encrypted_message.encode('UTF-8')).decode('utf-8')
+            # decrypt_message = fernet.decrypt(encrypted_message.encode('UTF-8')).decode('utf-8')
 
             #Saída dos processamentos
             print(f"Mensagem recebida em ternário: {message_6t}\n")
             print(f"Mensagem recebida em binário: {final_bytes}\n")
-            print(f"Mensagem recebida criptografada: {encrypted_message}\n")
-            print(f"Mensagem recebida: {decrypt_message}\n")
+            # print(f"Mensagem recebida criptografada: {encrypted_message}\n")
+            # print(f"Mensagem recebida: {decrypt_message}\n")
             Alg.plot_signal(message_6t)
 
             #print(f"Mensagem recebida: {message}\n")
-            if(decrypt_message=="exit"):
-                break
+            # if(decrypt_message=="exit"):
+            #     break
 
         client_socket.close()
 
 if __name__ == "__main__":
 
-    IP = "127.0.0.1"
+    IP = "192.168.100.74"
     PORT = 8080
 
     start_server(IP, PORT)
