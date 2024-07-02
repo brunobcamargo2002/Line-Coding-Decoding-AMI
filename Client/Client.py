@@ -66,8 +66,15 @@ def start_client(ip, port):
                         j = j+1
                     j = j-1
                     while (saldo >= 2):
-                        saldo =  saldo - 2
                         if(balanco[j] == 1):
+                            for i in range(j*6, j*6+6, 1):
+                                if (message_6t[i] == '+'):
+                                    message_6t[i] = '-'
+                                elif (message_6t[i] == '-'):
+                                    message_6t[i] = '+'
+                            saldo =  saldo - 2
+                        j = j-1
+                        
                         
 
 
