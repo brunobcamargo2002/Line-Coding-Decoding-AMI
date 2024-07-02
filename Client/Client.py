@@ -47,7 +47,32 @@ def start_client(ip, port):
                 message = input(f"Digite a mensagem para enviar ao servidor (ou 'exit' para sair):\n ")
                 #Processamentos da mensagem
                 binary_message = message
+
                 message_6t = pattern_to_pattern(binary_message)
+
+                #balanço DC
+                positive = message_6t.count('+')
+                negative = message_6t.count('-')
+                saldo = positive - negative
+                tamanho_bloco = 6
+                if ((saldo) >= 2 or (saldo) <= -2):
+                    j = 0
+                    balanco = 0
+                    for i in range(0, len(message_6t), tamanho_bloco):
+                        bloco = message_6t[i:i + tamanho_bloco]
+                        quantidade_mais = bloco.count('+')
+                        quantidade_menos = bloco.count('-')
+                        balanco[j] = quantidade_mais - quantidade_menos
+                        j = j+1
+                    j = j-1
+                    while (saldo >= 2):
+                        saldo =  saldo - 2
+                        if(balanco[j] == 1):
+                        
+
+
+
+                                           
                 #Saída dos processamentos
                 print(f"Mensagem enviada: {message}\n")
                 print(f"Mensagem enviada em binário: {binary_message}\n")
