@@ -92,7 +92,7 @@ def start_client(ip, port):
                                            
                 #Saída dos processamentos
                 print(f"Mensagem enviada: {message}\n")
-                print(f"Mensagem enviada em binário: {binary_message}\n")
+                print(f"Binário da mensagem: {binary_message}\n")
                 print(f"Mensagem enviada em ternário: {message_6t}\n")
 
                 Alg.plot_signal(message_6t)
