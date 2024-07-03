@@ -33,12 +33,12 @@ def start_client(ip, port):
                 print(f"Mensagem enviada: {message}\n")
                 print(f"Mensagem enviada criptografada: {crypto_message}\n")
                 print(f"Mensagem enviada em binário: {binary_message}\n")
-                print(f"Mensagem enviada em ternário: {message_6t}\n")
+                print(f"Mensagem enviada em ternário: {bal}\n")
 
-                Alg.plot_signal(message_6t)
+                Alg.plot_signal(bal)
 
                 #Envio da mensagem
-                connection.send_message(message_6t.encode())
+                connection.send_message(bal.encode())
 
             #-----------------------------------------SEM CRIPTOGRAFIA------------------------------------------------
 

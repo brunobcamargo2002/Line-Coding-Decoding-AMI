@@ -17,9 +17,6 @@ def start_server(ip, port):
         chave = filekey.read()
     fernet = Fernet(chave)
 
-    #Gera Map 8b6t
-    pattern_to_pattern, pattern_to_binary = algoritmo.generate_pattern_functions()
-
     while True:
         # Aceita uma conexão de um cliente
         client_socket, client_address = server_socket.accept()
@@ -42,6 +39,7 @@ def start_server(ip, port):
             Alg.plot_signal(message_6t)
 
             if(decrypt_message=='exit'):
+                client_socket.close()
                 break
 
             #-----------------------------------------SEM CRIPTOGRAFIA------------------------------------------------
